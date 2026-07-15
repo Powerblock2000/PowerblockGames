@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cs4ujcimcbvm6"]
+
+[ext_resource type="FontFile" uid="uid://l6jejmu3thev" path="res://Fonts/AlienBlock-Regular.ttf" id="1_0h8h6"]
+[ext_resource type="Script" uid="uid://dkm1mng07vo7p" path="res://Classes/SlideInText/SlideInText.gd" id="2_mxu1j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0a8jk"]
+font = ExtResource("1_0h8h6")
+
+[node name="Label" type="Label" unique_id=928012342]
+modulate = Color(0.5372549, 0.9882353, 0, 1)
+clip_contents = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -11.5
+offset_right = 98.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_0a8jk")
+visible_characters = 0
+visible_ratio = 0.0
+script = ExtResource("2_mxu1j")
+
+[node name="Slide" type="ColorRect" parent="." unique_id=1456677924]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -50.5
+offset_right = -5.0
+offset_bottom = 50.5
+grow_vertical = 2
+rotation = 0.2617994
+pivot_offset_ratio = Vector2(0.5, 0.5)

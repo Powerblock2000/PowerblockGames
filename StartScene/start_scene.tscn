@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://b8lqg1dg4kqcb"]
+
+[ext_resource type="Script" uid="uid://cpbxto606e41e" path="res://StartScene/start_scene.gd" id="1_tmopt"]
+[ext_resource type="FontFile" uid="uid://bt3kp22xkdaof" path="res://Fonts/Sora-VariableFont_wght.ttf" id="2_40aag"]
+[ext_resource type="FontFile" uid="uid://7rw5hytmpsb1" path="res://Fonts/HankenGrotesk-VariableFont_wght.ttf" id="2_gba8m"]
+[ext_resource type="Shader" uid="uid://0u57rbkgm4xr" path="res://Loading.gdshader" id="3_gba8m"]
+[ext_resource type="PackedScene" uid="uid://cs4ujcimcbvm6" path="res://Classes/SlideInText/SlideInText.tscn" id="4_gba8m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_orm1n"]
+font = ExtResource("2_40aag")
+font_size = 20
+font_color = Color(0.5372549, 0.9882353, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orm1n"]
+shader = ExtResource("3_gba8m")
+shader_parameter/arrows_amount = 1.0
+shader_parameter/screw_facor = 0.0
+shader_parameter/rotation_frequency = -0.49999850374999966
+shader_parameter/angle_half_width = 1.570000074575
+shader_parameter/angle_softness = 0.0
+shader_parameter/inner_radius = 0.8150000387125
+shader_parameter/outer_radius = 0.9
+shader_parameter/radius_softness = 0.0
+shader_parameter/base_color = Color(0.54450005, 0.99, 0, 0)
+shader_parameter/line_color = Color(0.5372549, 0.9882353, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_40aag"]
+font = ExtResource("2_gba8m")
+
+[sub_resource type="LabelSettings" id="LabelSettings_oo8bx"]
+font = ExtResource("2_gba8m")
+
+[node name="StartScene" type="ColorRect" unique_id=91054023]
+z_index = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.11764706, 0.12156863, 1)
+script = ExtResource("1_tmopt")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=210046227]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Control" type="Control" parent="MarginContainer" unique_id=1090819575]
+clip_contents = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Control" unique_id=519564137]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 62.0
+grow_vertical = 0
+text = "Loading..."
+label_settings = SubResource("LabelSettings_orm1n")
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control" unique_id=561122693]
+material = SubResource("ShaderMaterial_orm1n")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_vertical = 0
+
+[node name="Connected" parent="." unique_id=928012342 instance=ExtResource("4_gba8m")]
+visible = false
+layout_mode = 1
+offset_left = -61.5
+offset_right = 61.5
+text = "Connected..."
+label_settings = SubResource("LabelSettings_40aag")
+play_on_show = true
+
+[node name="CantConnect" parent="." unique_id=905132872 instance=ExtResource("4_gba8m")]
+visible = false
+modulate = Color(1, 0.34117648, 0.078431375, 1)
+layout_mode = 1
+offset_left = -100.5
+offset_right = 100.5
+text = "Error connecting..."
+label_settings = SubResource("LabelSettings_oo8bx")
+play_on_show = true
+
+[node name="Issues" type="Button" parent="." unique_id=2016355676]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -191.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_type_variation = &"TextButton"
+theme_override_font_sizes/font_size = 20
+text = "Report Issues on Github"
+
+[connection signal="pressed" from="Issues" to="." method="_on_issues_pressed"]

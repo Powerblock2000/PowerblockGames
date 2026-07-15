@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://dfwqngigtisal"]
+
+[ext_resource type="Script" uid="uid://5go81tgr3nph" path="res://MainMenu/incoming_friend_request.gd" id="1_kh6uv"]
+[ext_resource type="FontFile" uid="uid://doseqqkcbqk5p" path="res://Fonts/HankenGrotesk-Italic-VariableFont_wght.ttf" id="2_631pp"]
+[ext_resource type="Shader" uid="uid://0u57rbkgm4xr" path="res://Loading.gdshader" id="2_sdlyu"]
+[ext_resource type="Script" uid="uid://2dprbx4x4b3r" path="res://UsernameDisplay/username_display.gd" id="3_631pp"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s77fq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orm1n"]
+shader = ExtResource("2_sdlyu")
+shader_parameter/arrows_amount = 4.0
+shader_parameter/screw_facor = 0.0
+shader_parameter/rotation_frequency = 1.0
+shader_parameter/angle_half_width = 0.24
+shader_parameter/angle_softness = 0.0
+shader_parameter/inner_radius = 0.7600000361
+shader_parameter/outer_radius = 0.9
+shader_parameter/radius_softness = 0.02
+shader_parameter/base_color = Color(1, 1, 1, 0)
+shader_parameter/line_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dobwm"]
+font = ExtResource("2_631pp")
+font_size = 8
+font_color = Color(0.72466666, 1, 0.72, 0.4509804)
+shadow_size = 0
+
+[node name="IncomingFriendRequest" type="Panel" unique_id=551229989]
+custom_minimum_size = Vector2(0, 50)
+offset_bottom = 50.0
+theme_type_variation = &"FriendIncomingPanel"
+script = ExtResource("1_kh6uv")
+
+[node name="ProfilePicture" type="TextureRect" parent="." unique_id=1727947969]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 50.0
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_s77fq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Loading" type="ColorRect" parent="ProfilePicture" unique_id=1944466921]
+material = SubResource("ShaderMaterial_orm1n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ProfilePicture/Loading" unique_id=371406946]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45490196)
+
+[node name="Username" type="RichTextLabel" parent="ProfilePicture" unique_id=412795531]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 63.0
+offset_top = -11.0
+offset_right = 160.0
+offset_bottom = 12.0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "SampleUser "
+fit_content = true
+autowrap_mode = 0
+hint_underlined = false
+script = ExtResource("3_631pp")
+metadata/_custom_type_script = "uid://2dprbx4x4b3r"
+
+[node name="Label" type="Label" parent="ProfilePicture" unique_id=1509919754]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = -14.0
+offset_right = 125.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Wants to be your friend!"
+label_settings = SubResource("LabelSettings_dobwm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1150276508]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -20.0
+offset_right = 8.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Accept" type="Button" parent="HBoxContainer" unique_id=98817849]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_type_variation = &"TextButton"
+text = "Accept"
+
+[node name="Decline" type="Button" parent="HBoxContainer" unique_id=1998565052]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_type_variation = &"TextButton"
+text = "Decline"
+
+[connection signal="pressed" from="HBoxContainer/Accept" to="." method="_on_accept_pressed"]
+[connection signal="pressed" from="HBoxContainer/Decline" to="." method="_on_decline_pressed"]

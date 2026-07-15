@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://dljatqihchcg2"]
+
+[ext_resource type="Script" uid="uid://c87n4gvxdx3pr" path="res://DevApp/game.gd" id="1_fndm4"]
+[ext_resource type="Script" uid="uid://bs2do4vxfaemp" path="res://Classes/WebTextureButton/WebTextureButton.gd" id="1_jd2q3"]
+[ext_resource type="Texture2D" uid="uid://47rmbh0qvbxc" path="res://arrow_cool_down_40dp_E3E3E3_FILL0_wght400_GRAD0_opsz40.svg" id="2_fndm4"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w4me2"]
+size = Vector2(4, 4)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ica72"]
+size = Vector2(4, 2)
+
+[node name="Game" type="MarginContainer" unique_id=1125261697]
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_fndm4")
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1205801306]
+layout_mode = 2
+columns = 3
+
+[node name="GameIconSquare" type="TextureButton" parent="GridContainer" unique_id=1607356239]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture_normal = SubResource("PlaceholderTexture2D_w4me2")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("1_jd2q3")
+metadata/_custom_type_script = "uid://bs2do4vxfaemp"
+
+[node name="VSeparator" type="VSeparator" parent="GridContainer" unique_id=807803672]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer" unique_id=961074621]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GameName" type="LineEdit" parent="GridContainer/VBoxContainer" unique_id=1244803290]
+layout_mode = 2
+placeholder_text = "Game Name"
+
+[node name="GameID" type="Label" parent="GridContainer/VBoxContainer" unique_id=1794726569]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="GridContainer/VBoxContainer" unique_id=470396562]
+layout_mode = 2
+
+[node name="UpdatePCK" type="Button" parent="GridContainer/VBoxContainer" unique_id=1304204776]
+layout_mode = 2
+disabled = true
+text = "Upload Update | Coming soon..."
+
+[node name="HSeparator4" type="HSeparator" parent="GridContainer/VBoxContainer" unique_id=1095937830]
+layout_mode = 2
+
+[node name="Save" type="Button" parent="GridContainer/VBoxContainer" unique_id=737867906]
+layout_mode = 2
+text = "Save changes"
+
+[node name="HSeparator2" type="HSeparator" parent="GridContainer/VBoxContainer" unique_id=2001210202]
+layout_mode = 2
+
+[node name="GameIconWide" type="TextureButton" parent="GridContainer" unique_id=575154967]
+custom_minimum_size = Vector2(190, 256)
+layout_mode = 2
+texture_normal = SubResource("PlaceholderTexture2D_ica72")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("1_jd2q3")
+metadata/_custom_type_script = "uid://bs2do4vxfaemp"
+
+[node name="VSeparator2" type="VSeparator" parent="GridContainer" unique_id=1039198136]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="GridContainer" unique_id=110444191]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1014846963]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 464
+
+[node name="Control" type="Control" parent="MarginContainer" unique_id=927930403]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/Control" unique_id=131170529]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -15.5
+offset_right = 39.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+text = "Analytics"
+icon = ExtResource("2_fndm4")
+
+[connection signal="pressed" from="GridContainer/VBoxContainer/Save" to="." method="_on_save_pressed"]

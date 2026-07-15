@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dqce55neyv4l8"]
+
+[ext_resource type="Texture2D" uid="uid://1vf2mhg7lcnq" path="res://addons/powerblock_auth/PowerblockAuth/PowerblockAuthLargeWhite.svg" id="1_t3quw"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_t3quw"]
+
+[node name="Window" type="Window" unique_id=1492574289]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(400, 500)
+unresizable = true
+min_size = Vector2i(400, 500)
+max_size = Vector2i(400, 500)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=183641458]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1592088698]
+offset_right = 400.0
+offset_bottom = 500.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2052735647]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1025959414]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Control" unique_id=1438766309]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_t3quw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/Control" unique_id=1632370364]
+custom_minimum_size = Vector2(320, 128)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -64.0
+offset_right = 320.0
+offset_bottom = 64.0
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_t3quw")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1994127822]
+layout_mode = 2
+text = "Please choose a method to Sign In or Sign Up"
+horizontal_alignment = 1

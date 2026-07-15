@@ -1,0 +1,573 @@
+[gd_scene format=3 uid="uid://bo31dvyp34386"]
+
+[ext_resource type="Script" uid="uid://chq4r7k5r28hx" path="res://MainMenu/main_menu.gd" id="1_nhkf3"]
+[ext_resource type="Script" uid="uid://c76665t0e5q2i" path="res://MainMenu/profile_picture.gd" id="2_3w4mj"]
+[ext_resource type="Script" uid="uid://c2hkewno5422k" path="res://MainMenu/game.gd" id="2_ajn5b"]
+[ext_resource type="FontFile" uid="uid://doseqqkcbqk5p" path="res://Fonts/HankenGrotesk-Italic-VariableFont_wght.ttf" id="3_ajn5b"]
+[ext_resource type="Shader" uid="uid://0u57rbkgm4xr" path="res://Loading.gdshader" id="3_po2gx"]
+[ext_resource type="Script" uid="uid://ghddgvwohnl5" path="res://MainMenu/friends.gd" id="5_r0x8f"]
+[ext_resource type="Script" uid="uid://cdplixd2qtyqq" path="res://MainMenu/CustomSizeSetter.gd" id="6_jdgnk"]
+[ext_resource type="Script" uid="uid://2dprbx4x4b3r" path="res://UsernameDisplay/username_display.gd" id="9_83n0s"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_orm1n"]
+size = Vector2(4, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orm1n"]
+shader = ExtResource("3_po2gx")
+shader_parameter/arrows_amount = 4.0
+shader_parameter/screw_facor = 0.0
+shader_parameter/rotation_frequency = 1.0
+shader_parameter/angle_half_width = 0.24
+shader_parameter/angle_softness = 0.0
+shader_parameter/inner_radius = 0.7600000361
+shader_parameter/outer_radius = 0.9
+shader_parameter/radius_softness = 0.02
+shader_parameter/base_color = Color(1, 1, 1, 0)
+shader_parameter/line_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_orm1n"]
+font = ExtResource("3_ajn5b")
+font_color = Color(1, 1, 1, 0.41960785)
+shadow_color = Color(0, 0, 0, 0.7647059)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3w4mj"]
+
+[sub_resource type="Animation" id="Animation_kbpwf"]
+resource_name = "OpenPanel"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer/MarginContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:size:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(40, -0.25, 0, 0.25, 0, 110, -0.06666667, -11.666667, 0, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:size:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(40, -0.25, 0, 0.25, 0, 72, -0.06666667, -5.3333335, 0, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PanelContainer/Control:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_jdgnk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer/MarginContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:size:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(40, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:size:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(40, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PanelContainer/Control:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0x8f"]
+_data = {
+&"OpenPanel": SubResource("Animation_kbpwf"),
+&"RESET": SubResource("Animation_jdgnk")
+}
+
+[sub_resource type="Animation" id="Animation_3w4mj"]
+resource_name = "Drop"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(30, -0.16666667, 122.5, 1.0666667, -226.5, 765, -0.06666668, -124.16668, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_5de1l"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(765, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ajn5b"]
+_data = {
+&"Drop": SubResource("Animation_3w4mj"),
+&"RESET": SubResource("Animation_5de1l")
+}
+
+[node name="MainMenu" type="ColorRect" unique_id=1295319305]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.11764706, 0.12156863, 1)
+script = ExtResource("1_nhkf3")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=244626573]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -401.0
+offset_top = 117.0
+offset_right = 401.0
+offset_bottom = 735.0006
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"MainPanel"
+
+[node name="Control" type="Control" parent="PanelContainer" unique_id=370856006]
+layout_mode = 2
+
+[node name="PanelBG" type="Panel" parent="PanelContainer/Control" unique_id=1518326335]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_type_variation = &"BarPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Control" unique_id=646042888]
+layout_mode = 0
+offset_right = 802.0
+offset_bottom = 618.0005
+mouse_filter = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 17
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 10
+
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/Control/MarginContainer" unique_id=1890472288]
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"MainMenuTab"
+tab_alignment = 1
+current_tab = 0
+
+[node name="Home" type="MarginContainer" parent="PanelContainer/Control/MarginContainer/TabContainer" unique_id=987075238]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 8
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Home" unique_id=752163914]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer" unique_id=2075218602]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HeroImages" type="ScrollContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer" unique_id=284574256]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+scroll_horizontal = 100
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+scroll_horizontal_by_default = true
+scroll_hint_mode = 3
+tile_scroll_hint = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages" unique_id=1018759781]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="game1" type="TextureButton" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages/HBoxContainer" unique_id=1386991266]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+texture_normal = SubResource("PlaceholderTexture2D_orm1n")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_ajn5b")
+metadata/_custom_type_script = "uid://bs2do4vxfaemp"
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages/HBoxContainer/game1" unique_id=798522167]
+material = SubResource("ShaderMaterial_orm1n")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages/HBoxContainer/game1/ColorRect" unique_id=621511692]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45490196)
+
+[node name="game2" type="TextureButton" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages/HBoxContainer" unique_id=734247317]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+texture_normal = SubResource("PlaceholderTexture2D_orm1n")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_ajn5b")
+metadata/_custom_type_script = "uid://bs2do4vxfaemp"
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages/HBoxContainer/game2" unique_id=426196500]
+material = SubResource("ShaderMaterial_orm1n")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages/HBoxContainer/game2/ColorRect" unique_id=1805054480]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45490196)
+
+[node name="game3" type="TextureButton" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages/HBoxContainer" unique_id=1986094637]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+texture_normal = SubResource("PlaceholderTexture2D_orm1n")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_ajn5b")
+metadata/_custom_type_script = "uid://bs2do4vxfaemp"
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages/HBoxContainer/game3" unique_id=1486814239]
+material = SubResource("ShaderMaterial_orm1n")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HeroImages/HBoxContainer/game3/ColorRect" unique_id=2142127495]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45490196)
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer" unique_id=1754644061]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer" unique_id=876830205]
+layout_mode = 2
+
+[node name="SearchBar" type="LineEdit" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1046562012]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search"
+alignment = 1
+
+[node name="Search" type="Button" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=755946962]
+layout_mode = 2
+text = "Search"
+
+[node name="Label" type="Label" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer" unique_id=1172422700]
+layout_mode = 2
+text = "Search to get started!"
+label_settings = SubResource("LabelSettings_orm1n")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer" unique_id=1976127448]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="SearchGames" type="GridContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/MarginContainer" unique_id=889401909]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 103
+columns = 3
+
+[node name="LoadingSearch" type="ColorRect" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/MarginContainer" unique_id=2129683850]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+color = Color(0, 0, 0, 0.19607843)
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/Control/MarginContainer/TabContainer/Home/ScrollContainer/VBoxContainer/MarginContainer/LoadingSearch" unique_id=1112154631]
+material = SubResource("ShaderMaterial_orm1n")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Friends" type="MarginContainer" parent="PanelContainer/Control/MarginContainer/TabContainer" unique_id=2064898250]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 10
+script = ExtResource("5_r0x8f")
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Friends" unique_id=284664803]
+layout_mode = 2
+
+[node name="AddFriend" type="HBoxContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer" unique_id=1850879483]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FriendUsername" type="LineEdit" parent="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer/AddFriend" unique_id=574230877]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Add friend via username"
+
+[node name="Add" type="Button" parent="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer/AddFriend" unique_id=1428821114]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Add"
+
+[node name="Refresh" type="Button" parent="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer/AddFriend" unique_id=1461936517]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Refresh"
+
+[node name="Panel" type="Panel" parent="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer" unique_id=1138564153]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"CurvedPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer/Panel" unique_id=464793712]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer/Panel/MarginContainer" unique_id=817118489]
+layout_mode = 2
+
+[node name="FriendsList" type="VBoxContainer" parent="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer/Panel/MarginContainer/ScrollContainer" unique_id=49045876]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="PanelContainer/Control" unique_id=1073632514]
+z_index = 2
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_type_variation = &"BarPanelClear"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Control/Panel" unique_id=1847609089]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -373.0
+offset_top = 14.0
+offset_right = 373.0
+offset_bottom = 54.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureButton" parent="PanelContainer/Control/Panel/HBoxContainer" unique_id=1598969547]
+z_index = 5
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture_normal = SubResource("PlaceholderTexture2D_3w4mj")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("2_3w4mj")
+metadata/_custom_type_script = "uid://bs2do4vxfaemp"
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/Control/Panel/HBoxContainer/Icon" unique_id=178450458]
+show_behind_parent = true
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_type_variation = &"DropDownPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Control/Panel/HBoxContainer/Icon/PanelContainer" unique_id=288386747]
+visible = false
+z_index = 2
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Control/Panel/HBoxContainer/Icon/PanelContainer/MarginContainer" unique_id=728517689]
+z_index = 2
+layout_mode = 2
+
+[node name="Settings" type="Button" parent="PanelContainer/Control/Panel/HBoxContainer/Icon/PanelContainer/MarginContainer/VBoxContainer" unique_id=15652388]
+z_index = 2
+layout_mode = 2
+theme_type_variation = &"TextButton"
+text = "Settings"
+
+[node name="Control" type="Control" parent="PanelContainer/Control/Panel/HBoxContainer/Icon/PanelContainer" unique_id=816780173]
+visible = false
+show_behind_parent = true
+z_index = 2
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("6_jdgnk")
+
+[node name="Username" type="RichTextLabel" parent="PanelContainer/Control/Panel/HBoxContainer/Icon/PanelContainer/Control" unique_id=187074556]
+layout_mode = 1
+offset_left = 40.0
+offset_right = 110.0
+offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "SampleUser "
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+hint_underlined = false
+script = ExtResource("9_83n0s")
+font_size = 12
+metadata/_custom_type_script = "uid://2dprbx4x4b3r"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PanelContainer/Control/Panel/HBoxContainer/Icon" unique_id=191856595]
+libraries/ = SubResource("AnimationLibrary_r0x8f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1232390990]
+libraries/ = SubResource("AnimationLibrary_ajn5b")
+
+[connection signal="connected" from="." to="PanelContainer/Control/MarginContainer/TabContainer/Friends" method="_on_main_menu_connected"]
+[connection signal="connected" from="." to="PanelContainer/Control/Panel/HBoxContainer/Icon" method="_on_main_menu_connected"]
+[connection signal="pressed" from="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer/AddFriend/Add" to="PanelContainer/Control/MarginContainer/TabContainer/Friends" method="_on_add_pressed"]
+[connection signal="pressed" from="PanelContainer/Control/MarginContainer/TabContainer/Friends/VBoxContainer/AddFriend/Refresh" to="PanelContainer/Control/MarginContainer/TabContainer/Friends" method="_on_refresh_pressed"]
+[connection signal="pressed" from="PanelContainer/Control/Panel/HBoxContainer/Icon/PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

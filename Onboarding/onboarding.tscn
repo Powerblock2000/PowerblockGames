@@ -1,0 +1,231 @@
+[gd_scene format=3 uid="uid://bksewkwq1oepq"]
+
+[ext_resource type="Script" uid="uid://dvjhiorxb40vq" path="res://Onboarding/control.gd" id="1_6b1x0"]
+[ext_resource type="Script" uid="uid://brevy0sh53c3" path="res://Onboarding/onboarding.gd" id="1_jlaf3"]
+[ext_resource type="FontFile" uid="uid://7rw5hytmpsb1" path="res://Fonts/HankenGrotesk-VariableFont_wght.ttf" id="3_13fr6"]
+[ext_resource type="Shader" uid="uid://0u57rbkgm4xr" path="res://Loading.gdshader" id="4_13fr6"]
+[ext_resource type="Script" uid="uid://2dprbx4x4b3r" path="res://UsernameDisplay/username_display.gd" id="5_fuh55"]
+[ext_resource type="FontFile" uid="uid://bt3kp22xkdaof" path="res://Fonts/Sora-VariableFont_wght.ttf" id="6_3o2uk"]
+
+[sub_resource type="FontVariation" id="FontVariation_0a8jk"]
+base_font = ExtResource("3_13fr6")
+variation_embolden = 0.14
+
+[sub_resource type="LabelSettings" id="LabelSettings_orm1n"]
+font = SubResource("FontVariation_0a8jk")
+font_size = 28
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jlaf3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orm1n"]
+shader = ExtResource("4_13fr6")
+shader_parameter/arrows_amount = 4.0
+shader_parameter/screw_facor = 0.0
+shader_parameter/rotation_frequency = 1.0
+shader_parameter/angle_half_width = 0.24
+shader_parameter/angle_softness = 0.0
+shader_parameter/inner_radius = 0.7600000361
+shader_parameter/outer_radius = 0.9
+shader_parameter/radius_softness = 0.02
+shader_parameter/base_color = Color(1, 1, 1, 0)
+shader_parameter/line_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_s77fq"]
+font = ExtResource("6_3o2uk")
+
+[sub_resource type="LabelSettings" id="LabelSettings_gag0y"]
+font = ExtResource("6_3o2uk")
+font_color = Color(0.63, 0.63, 0.63, 1)
+
+[sub_resource type="Animation" id="Animation_13fr6"]
+resource_name = "Drop"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(37, -0.25, 0, 1.0666667, -226.5, 765, -0.06666668, -124.16668, 0, 0),
+"times": PackedFloat32Array(-0.033333335, 1)
+}
+
+[sub_resource type="Animation" id="Animation_fuh55"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(765, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3o2uk"]
+_data = {
+&"Drop": SubResource("Animation_13fr6"),
+&"RESET": SubResource("Animation_fuh55")
+}
+
+[node name="Onboarding" type="Control" unique_id=798993757]
+z_index = 6
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jlaf3")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1835297795]
+z_index = 6
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -257.0
+offset_top = 117.0
+offset_right = 257.0
+offset_bottom = 734.99976
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"MainPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=287920548]
+z_index = 6
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer" unique_id=1691010492]
+z_index = 6
+layout_mode = 2
+script = ExtResource("1_6b1x0")
+
+[node name="Welcome" type="Label" parent="PanelContainer/MarginContainer/Control" unique_id=2069552622]
+z_index = 6
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Welcome to Powerblock Games"
+label_settings = SubResource("LabelSettings_orm1n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProfilePicture" type="TextureRect" parent="PanelContainer/MarginContainer/Control" unique_id=378517778]
+z_index = 6
+layout_mode = 1
+offset_top = 114.765
+offset_right = 120.0
+offset_bottom = 234.76506
+texture = SubResource("PlaceholderTexture2D_jlaf3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Control/ProfilePicture" unique_id=1625899533]
+z_index = 6
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -33.000046
+offset_right = 362.0
+offset_bottom = 32.999954
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="UsernameLE" type="LineEdit" parent="PanelContainer/MarginContainer/Control/ProfilePicture/VBoxContainer" unique_id=1433351620]
+layout_mode = 2
+placeholder_text = "Username"
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/Control/ProfilePicture/VBoxContainer" unique_id=1279010362]
+z_index = 6
+layout_mode = 2
+placeholder_text = "Display Name"
+
+[node name="LetsGo" type="Button" parent="PanelContainer/MarginContainer/Control/ProfilePicture/VBoxContainer" unique_id=1000769760]
+z_index = 6
+layout_mode = 2
+disabled = true
+text = "Looks Good!"
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/MarginContainer/Control/ProfilePicture" unique_id=821431928]
+z_index = 6
+material = SubResource("ShaderMaterial_orm1n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/MarginContainer/Control/ProfilePicture/ColorRect" unique_id=1176151802]
+show_behind_parent = true
+z_index = 6
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45490196)
+
+[node name="Username" type="RichTextLabel" parent="PanelContainer/MarginContainer/Control" unique_id=2100617811]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.0
+offset_top = 37.0
+offset_right = 50.0
+offset_bottom = 77.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "SampleUser "
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+hint_underlined = false
+script = ExtResource("5_fuh55")
+font_size = 28
+metadata/_custom_type_script = "uid://2dprbx4x4b3r"
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Control" unique_id=139596290]
+layout_mode = 1
+offset_top = 77.0
+offset_right = 298.0
+offset_bottom = 100.0
+text = "This is how you'll appear. Look good?"
+label_settings = SubResource("LabelSettings_s77fq")
+
+[node name="Error" type="Label" parent="PanelContainer/MarginContainer/Control" unique_id=236375619]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -63.5
+offset_right = 20.0
+offset_bottom = -40.5
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_gag0y")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1818688836]
+libraries/ = SubResource("AnimationLibrary_3o2uk")

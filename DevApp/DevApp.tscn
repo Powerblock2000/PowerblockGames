@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://diat4fjhb3duy"]
+
+[ext_resource type="Script" uid="uid://b6mg0nq3brd7r" path="res://DevApp/dev_app.gd" id="1_ox2uq"]
+[ext_resource type="Shader" uid="uid://c2essykew76nm" path="res://addons/powerblock_auth/PowerblockAuth/loading.gdshader" id="2_u1445"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u1445"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s77fq"]
+font_color = Color(1, 1, 1, 0.30588236)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s77fq"]
+shader = ExtResource("2_u1445")
+shader_parameter/arrows_amount = 4.0
+shader_parameter/screw_facor = 0.0
+shader_parameter/rotation_frequency = 1.0
+shader_parameter/angle_half_width = 0.24
+shader_parameter/angle_softness = 0.6800000323
+shader_parameter/inner_radius = 0.7050000334875
+shader_parameter/outer_radius = 0.9
+shader_parameter/radius_softness = 0.0
+shader_parameter/base_color = Color(1, 1, 1, 0)
+shader_parameter/line_color = Color(1, 1, 1, 1)
+
+[node name="DevApp" type="ColorRect" unique_id=1651330944]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12591085, 0.12591085, 0.12591082, 1)
+script = ExtResource("1_ox2uq")
+
+[node name="Label" type="Label" parent="." unique_id=1164377178]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Welcome to the dev panel :)"
+label_settings = SubResource("LabelSettings_u1445")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1713496708]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 42
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=438611834]
+unique_name_in_owner = true
+layout_mode = 2
+current_tab = 0
+
+[node name="New Game" type="MarginContainer" parent="MarginContainer/TabContainer" unique_id=1740567028]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/New Game" unique_id=1108556075]
+layout_mode = 2
+
+[node name="GameName" type="LineEdit" parent="MarginContainer/TabContainer/New Game/VBoxContainer" unique_id=1041340708]
+layout_mode = 2
+placeholder_text = "Game Name"
+
+[node name="GameID" type="LineEdit" parent="MarginContainer/TabContainer/New Game/VBoxContainer" unique_id=1285444193]
+layout_mode = 2
+placeholder_text = "game_id"
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/New Game/VBoxContainer" unique_id=136245074]
+layout_mode = 2
+text = "please use snake case :)"
+label_settings = SubResource("LabelSettings_s77fq")
+horizontal_alignment = 1
+
+[node name="IconSquare" type="LineEdit" parent="MarginContainer/TabContainer/New Game/VBoxContainer" unique_id=1819118906]
+layout_mode = 2
+placeholder_text = "Square icon URL (32x32, .SVG)"
+
+[node name="IconLong" type="LineEdit" parent="MarginContainer/TabContainer/New Game/VBoxContainer" unique_id=984579003]
+layout_mode = 2
+placeholder_text = "Long icon URL (190x256, .SVG)"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/TabContainer/New Game/VBoxContainer" unique_id=1523736632]
+layout_mode = 2
+
+[node name="Upload" type="Button" parent="MarginContainer/TabContainer/New Game/VBoxContainer" unique_id=725621004]
+layout_mode = 2
+text = "Upload PCK"
+
+[node name="Submit" type="Button" parent="MarginContainer/TabContainer/New Game/VBoxContainer" unique_id=1741876520]
+layout_mode = 2
+text = "Submit"
+
+[node name="UploadPCKDialog" type="FileDialog" parent="MarginContainer/TabContainer/New Game" unique_id=465354522]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.pck", "*.zip")
+
+[node name="Loading" type="ColorRect" parent="." unique_id=222079694]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.06, 0.06, 0.48235294)
+
+[node name="ColorRect" type="ColorRect" parent="Loading" unique_id=978750394]
+material = SubResource("ShaderMaterial_s77fq")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Help" type="Button" parent="." unique_id=1537620147]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+offset_right = 27.0
+grow_vertical = 0
+theme_type_variation = &"TextButton"
+text = "Help"
+
+[connection signal="pressed" from="MarginContainer/TabContainer/New Game/VBoxContainer/Upload" to="." method="_on_upload_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/New Game/VBoxContainer/Submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="Help" to="." method="_on_help_pressed"]
