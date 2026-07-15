@@ -20,7 +20,6 @@ var pck_uploaded : bool = false
 var pck_file_path : String
 
 func game_updated(_game_id: String, updated_game_name: String, update_game_icon_long_url: String, update_game_icon_square_url: String, update_is_public: bool, update_pck_path: String) -> void:
-	loading.show()
 	
 	#print("%s, %s, %s, %s, %s, %s" % [_game_id, updated_game_name, update_game_icon_long_url, update_game_icon_square_url, update_is_public, update_pck_path])
 	
@@ -160,7 +159,10 @@ func get_upload_url(file_name: String) -> String:
 	"Authorization: Bearer " + NakamaManager.nakama_session.token
 	]
 	
-	http.request("http://0.0.0.0:8000/get-upload-url?filename=%s" % file_name.uri_encode(), headers)
+	var error : Error = http.request("https://auth.powerblockgames.powerblock.hackclub.app/get-upload-url?filename=%s" % file_name.uri_encode(), headers)
+	
+	if error != OK:
+		push_warning("Couldnt get upload URL")
 	
 	var response : Array = await http.request_completed
 	

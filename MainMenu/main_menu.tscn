@@ -499,7 +499,7 @@ grow_horizontal = 2
 mouse_filter = 2
 
 [node name="Icon" type="TextureButton" parent="PanelContainer/Control/Panel/HBoxContainer" unique_id=1598969547]
-z_index = 5
+z_index = 2
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture_normal = SubResource("PlaceholderTexture2D_3w4mj")
@@ -518,7 +518,7 @@ theme_type_variation = &"DropDownPanel"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Control/Panel/HBoxContainer/Icon/PanelContainer" unique_id=288386747]
 visible = false
-z_index = 2
+z_index = 1
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 50

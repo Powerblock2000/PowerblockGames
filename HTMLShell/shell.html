@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <title>$GODOT_PROJECT_NAME</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Reset & Theme */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #0b0b0c;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        /* The Godot Game Canvas */
+        #canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        #canvas:focus {
+            outline: none;
+        }
+
+        /* Modern Dark Landing Screen Overlay */
+        #homepage-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0b0b0c;
+            display: flex;
+            z-index: 999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        /* Left side: Game Branding & Start controls */
+        .hero-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10% 5% 10% 8%;
+            z-index: 2;
+        }
+
+        .title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 400;
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 2rem;
+            color: #ffffff;
+        }
+
+        /* Sharp, modern Start Button */
+        .start-btn {
+            font-family: 'Unbounded', sans-serif;
+            align-self: flex-start;
+            background: transparent;
+            color: #ffffff;
+            border: 3px solid #ffffff;
+            padding: 1rem 3rem;
+            font-size: 1.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .start-btn:hover {
+            background-color: #ffffff;
+            color: #0b0b0c;
+        }
+
+        .start-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Sharp loading container (hidden by default) */
+        .loading-container {
+            display: none;
+            margin-top: 2rem;
+            max-width: 350px;
+            width: 100%;
+            flex-direction: column;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-status {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #88888b;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 10px;
+            border: 2px solid #ffffff;
+            background-color: transparent;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            width: 0%; /* Dynamic */
+            height: 100%;
+            background-color: #ffffff;
+            transition: width 0.1s ease;
+        }
+
+        /* Error/Notice display styled modernly */
+        #status-notice {
+            display: none;
+            background-color: #2a1418;
+            border: 2px solid #ff4a5a;
+            color: #ffb3ba;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-top: 1.5rem;
+            max-width: 450px;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        /* Right side: Angled scrolling area */
+        .scroll-sidebar-container {
+            width: 45%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            background-color: #121214;
+            border-left: 4px solid #ffffff;
+            transform: skewX(-12deg) translateX(10%);
+        }
+
+        /* Infinite vertical scrolling lane */
+        .scroll-lane {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: absolute;
+            width: 120%;
+            left: -10%;
+            animation: scrollUp 25s linear infinite;
+        }
+
+        /* Duplicate lane for seamless looping */
+        .scroll-lane-duplicate {
+            animation: scrollUp 25s linear infinite;
+            animation-delay: -12.5s;
+        }
+
+        /* Scrolling Grid Blocks */
+        .scroll-item {
+            width: 100%;
+            height: 250px;
+            border: 4px solid #ffffff;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) contrast(120%);
+            transition: filter 0.3s ease;
+            position: relative;
+        }
+
+        .scroll-item:hover {
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        /* Direction indicators inside lanes */
+        .scroll-item::after {
+            content: '↗';
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.5rem;
+            color: #ffffff;
+            opacity: 0.6;
+        }
+
+        /* CSS Animation for Infinite Scrolling */
+        @keyframes scrollUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-100%); }
+        }
+
+        /* Fade transition class to hide overlay */
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Mobile adaptation */
+        @media (max-width: 768px) {
+            #homepage-overlay {
+                flex-direction: column;
+            }
+            .hero-section {
+                flex: 1;
+                padding: 2rem;
+                justify-content: flex-end;
+            }
+            .scroll-sidebar-container {
+                width: 100%;
+                height: 40%;
+                transform: none;
+                border-left: none;
+                border-top: 4px solid #ffffff;
+            }
+            .scroll-lane {
+                flex-direction: row;
+                width: auto;
+                height: 100%;
+                animation: scrollLeft 20s linear infinite;
+            }
+            .scroll-item {
+                width: 200px;
+                height: 100%;
+            }
+            @keyframes scrollLeft {
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+            }
+        }
+    </style>
+    $GODOT_HEAD_INCLUDE
+</head>
+<body>
+
+    <div id="homepage-overlay">
+        <div class="hero-section">
+            <h1 class="title">Powerblock<br>Games</h1>
+            
+            <button id="start-btn" class="start-btn">Start</button>
+
+            <div id="loading-container" class="loading-container">
+                <div id="loading-status" class="loading-status">Loading: 0%</div>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <div id="status-notice"></div>
+        </div>
+
+        <div class="scroll-sidebar-container">
+            <div class="scroll-lane">
+                <div class="scroll-item" style="background-image: url('https://picsum.photos/600/400?random=1');"></div>
+                <div class="scroll-item" style="background-image: url('https://picsum.photos/600/400?random=2');"></div>
+                <div class="scroll-item" style="background-image: url('https://picsum.photos/600/400?random=3');"></div>
+                <div class="scroll-item" style="background-image: url('https://picsum.photos/600/400?random=4');"></div>
+            </div>
+            <div class="scroll-lane scroll-lane-duplicate">
+                <div class="scroll-item" style="background-image: url('https://picsum.photos/600/400?random=1');"></div>
+                <div class="scroll-item" style="background-image: url('https://picsum.photos/600/400?random=2');"></div>
+                <div class="scroll-item" style="background-image: url('https://picsum.photos/600/400?random=3');"></div>
+                <div class="scroll-item" style="background-image: url('https://picsum.photos/600/400?random=4');"></div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="canvas">
+        Your browser does not support the canvas tag.
+    </canvas>
+
+    <noscript>
+        Your browser does not support JavaScript.
+    </noscript>
+
+    <script src="$GODOT_URL"></script>
+    <script>
+        const GODOT_CONFIG = $GODOT_CONFIG;
+        const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
+        const engine = new Engine(GODOT_CONFIG);
+
+        (function () {
+            const overlay = document.getElementById('homepage-overlay');
+            const startBtn = document.getElementById('start-btn');
+            const progressBarFill = document.getElementById('progress-bar-fill');
+            const loadingStatus = document.getElementById('loading-status');
+            const loadingContainer = document.getElementById('loading-container');
+            const statusNotice = document.getElementById('status-notice');
+
+            function setStatusNotice(text) {
+                while (statusNotice.lastChild) {
+                    statusNotice.removeChild(statusNotice.lastChild);
+                }
+                const lines = text.split('\n');
+                lines.forEach((line) => {
+                    statusNotice.appendChild(document.createTextNode(line));
+                    statusNotice.appendChild(document.createElement('br'));
+                });
+            }
+
+            function displayFailureNotice(err) {
+                console.error(err);
+                if (err instanceof Error) {
+                    setStatusNotice(err.message);
+                } else if (typeof err === 'string') {
+                    setStatusNotice(err);
+                } else {
+                    setStatusNotice('An unknown error occurred.');
+                }
+                statusNotice.style.display = 'block';
+                loadingContainer.style.display = 'none';
+                startBtn.style.display = 'block'; // Bring back start button in case of failure
+            }
+
+            // Check if user is missing browser features
+            const missing = Engine.getMissingFeatures({
+                threads: GODOT_THREADS_ENABLED,
+            });
+
+            // Set up click listener on the start button
+            startBtn.addEventListener('click', () => {
+                // 1. Hide the start button, display & fade in the loading bar
+                startBtn.style.display = 'none';
+                loadingContainer.style.display = 'flex';
+                setTimeout(() => {
+                    loadingContainer.style.opacity = '1';
+                }, 50);
+
+                // 2. Begin check & load sequence
+                if (missing.length !== 0) {
+                    if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
+                        let serviceWorkerRegistrationPromise;
+                        try {
+                            serviceWorkerRegistrationPromise = navigator.serviceWorker.getRegistration();
+                        } catch (err) {
+                            serviceWorkerRegistrationPromise = Promise.reject(new Error('Service worker registration failed.'));
+                        }
+                        Promise.race([
+                            serviceWorkerRegistrationPromise.then((registration) => {
+                                if (registration != null) {
+                                    return Promise.reject(new Error('Service worker already exists.'));
+                                }
+                                return registration;
+                            }).then(() => engine.installServiceWorker()),
+                            new Promise((resolve) => {
+                                setTimeout(() => resolve(), 2000);
+                            }),
+                        ]).then(() => {
+                            window.location.reload();
+                        }).catch((err) => {
+                            console.error('Error while registering service worker:', err);
+                        });
+                    } else {
+                        const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
+                        displayFailureNotice(missingMsg + missing.join('\n'));
+                    }
+                } else {
+                    // 3. Trigger actual Godot Game Engine initialization & download assets
+                    engine.startGame({
+                        'onProgress': function (current, total) {
+                            if (current > 0 && total > 0) {
+                                const percentage = Math.floor((current / total) * 100);
+                                progressBarFill.style.width = percentage + '%';
+                                loadingStatus.textContent = `Loading: ${percentage}%`;
+                            } else {
+                                progressBarFill.style.width = '0%';
+                                loadingStatus.textContent = `Loading...`;
+                            }
+                        },
+                    }).then(() => {
+                        // 4. Loading is 100% finished! Hide the homepage and run
+                        overlay.classList.add('hidden');
+                    }, displayFailureNotice);
+                }
+            });
+        }());
+    </script>
+</body>
+</html>

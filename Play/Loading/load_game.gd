@@ -7,6 +7,8 @@ class_name LoadGame
 @onready var fun_mouse: GPUParticles2D = $GPUParticles2D
 @onready var mouse_confetti: CPUParticles2D = $CPUParticles2D
 @onready var label: Label = %Label
+@onready var loading: ColorRect = $PanelContainer/MarginContainer/VBoxContainer/TextureRect/Loading
+@onready var texture_rect: TextureRect = $PanelContainer/MarginContainer/VBoxContainer/TextureRect
 
 var fun_mode : bool = false
 var game_download_user : String:
@@ -18,6 +20,14 @@ var game_name : String:
 	set(value):
 		game_name = value
 var game_id : String
+var game_image_url : String: 
+	set(value):
+		game_image_url = value
+		load_texture_url.call_deferred(value)
+
+func load_texture_url(url: String) -> void:
+	texture_rect.texture = await PbUtils.get_image_from_url(url, 8)
+	loading.hide()
 
 func _process(_delta: float) -> void:
 	if game_name != "":
@@ -33,7 +43,8 @@ func _input(event: InputEvent) -> void:
 		mouse_confetti.emitting = true
 
 func _ready() -> void:
-	await get_tree().create_timer(.5).timeout
+	
+	
 	animation_player.play("Loadin")
 	await animation_player.animation_finished
 	
@@ -83,3 +94,6 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 	if !toggled_on: return
 	
 	confetti.emitting = true
+
+func _on_discord_pressed() -> void:
+	OS.shell_open("https://discord.gg/MWmRVfaejN")

@@ -94,7 +94,7 @@ func featured_game_pressed(game_id: String) -> void:
 			game_info = await get_game_info(g, game_author)
 			break
 	
-	start_game(game_info.file_name, game_info.game_name, game_info.game_author, game_info.game_id)
+	start_game(game_info.file_name, game_info.game_name, game_info.game_author, game_info.game_id, game_info.game_image_square_url)
 
 func search_bar_submitted(_text: String) -> void:
 	search_games()
@@ -117,17 +117,18 @@ func search_games() -> void:
 		game_button.name = g
 		
 		%SearchGames.add_child(game_button)
-		game_button.pressed.connect(start_game.bind(game_info.file_name, game_info.game_name, game_info.game_author, game_info.game_id))
+		game_button.pressed.connect(start_game.bind(game_info.file_name, game_info.game_name, game_info.game_author, game_info.game_id, game_info.game_image_square_url))
 	
 	%LoadingSearch.hide()
 
-func start_game(game_file_name: String, game_name: String, game_download_user: String, game_id: String) -> void:
+func start_game(game_file_name: String, game_name: String, game_download_user: String, game_id: String, game_image_url: String) -> void:
 	print("File name: %s, game name: %s" % [game_file_name, game_name])
 	var load_game : LoadGame = LOAD_GAME_SCENE.instantiate()
 	load_game.game_id = game_id
 	load_game.game_download_file = game_file_name
 	load_game.game_download_user = game_download_user
 	load_game.game_name = game_name
+	load_game.game_image_url = game_image_url
 	get_viewport().add_child(load_game)
 
 class GameInfo:

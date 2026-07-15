@@ -88,6 +88,9 @@ func connect_to_server(try_to_refresh: bool = true):
 			return
 		else:
 			print("Developer not approved!")
+	elif OS.has_feature("DevApp"):
+		get_tree().quit(-1)
+		return
 	
 	if user.display_name == "": #or true:
 		print("Onboarding!")

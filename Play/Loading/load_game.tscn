@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dknufjacyhyfq" path="res://Play/Loading/load_game.gd" id="1_man08"]
 [ext_resource type="FontFile" uid="uid://bt3kp22xkdaof" path="res://Fonts/Sora-VariableFont_wght.ttf" id="1_xnikx"]
+[ext_resource type="Shader" uid="uid://0u57rbkgm4xr" path="res://Loading.gdshader" id="2_vck7g"]
 [ext_resource type="Texture2D" uid="uid://yh87y27tlq3l" path="res://Confetti.png" id="3_x6iu5"]
 
 [sub_resource type="Gradient" id="Gradient_xnikx"]
@@ -18,6 +19,19 @@ fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s77fq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s77fq"]
+shader = ExtResource("2_vck7g")
+shader_parameter/arrows_amount = 2.0
+shader_parameter/screw_facor = 0.0
+shader_parameter/rotation_frequency = 1.0
+shader_parameter/angle_half_width = 0.24
+shader_parameter/angle_softness = 0.450000021375
+shader_parameter/inner_radius = 0.714000033915
+shader_parameter/outer_radius = 0.9
+shader_parameter/radius_softness = 0.02
+shader_parameter/base_color = Color(1, 1, 1, 0)
+shader_parameter/line_color = Color(1, 1, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gag0y"]
 font = ExtResource("1_xnikx")
@@ -477,7 +491,7 @@ anchor_bottom = 0.5
 offset_left = -120.0
 offset_top = 376.0
 offset_right = 120.0
-offset_bottom = 686.0001
+offset_bottom = 707.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"LoadingPanel"
@@ -500,6 +514,30 @@ custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 texture = SubResource("PlaceholderTexture2D_s77fq")
 
+[node name="Loading" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/TextureRect" unique_id=294842219]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4117647)
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/TextureRect/Loading" unique_id=1257646283]
+material = SubResource("ShaderMaterial_s77fq")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1546033236]
 y_sort_enabled = true
 custom_minimum_size = Vector2(0, 19.295)
@@ -520,6 +558,12 @@ layout_mode = 2
 text = "Please wait... Loading"
 label_settings = SubResource("LabelSettings_s77fq")
 horizontal_alignment = 1
+
+[node name="Discord" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=941803151]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"TextButton"
+text = "Report Games Here"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="PanelContainer" unique_id=261061646]
 show_behind_parent = true
@@ -598,4 +642,5 @@ hue_variation_min = -1.0
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("Curve_w4me2")
 
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Discord" to="." method="_on_discord_pressed"]
 [connection signal="toggled" from="CheckButton" to="." method="_on_check_button_toggled"]

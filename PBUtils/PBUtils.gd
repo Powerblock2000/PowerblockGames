@@ -52,7 +52,7 @@ func get_download_url(file_name: String, get_as_error: bool = false) -> Variant:
 	"Authorization: Bearer " + NakamaManager.nakama_session.token
 	]
 	
-	http.request("http://0.0.0.0:8000/get-download-url?filename=%s" % file_name.uri_encode(), headers)
+	http.request("https://auth.powerblockgames.powerblock.hackclub.app/get-download-url?filename=%s" % file_name.uri_encode(), headers)
 	
 	var response : Array = await http.request_completed
 	http.queue_free()
@@ -130,7 +130,7 @@ func get_file_from_s3(filename: String) -> Dictionary:
 	var http : HTTPRequest = HTTPRequest.new()
 	add_child(http)
 	
-	http.request("http://0.0.0.0:8000/get-download-url?filename=%s" % filename, headers)
+	http.request("https://auth.powerblockgames.powerblock.hackclub.app/get-download-url?filename=%s" % filename, headers)
 	
 	var response : Array = await http.request_completed
 	
