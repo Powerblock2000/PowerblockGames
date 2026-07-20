@@ -25,3 +25,6 @@ instead of bundling all games into the website we upload our games to a remote s
 
 ## AI Usage:
 Some ai was used for functional code/styling, all ideas are my own :)
+
+## Tech Stack:
+The client was made using the godot game engine along with all games for the platform, the backend uses Nakama by Heroic Labs with TypeScript modules and FastAPI for user verification.
