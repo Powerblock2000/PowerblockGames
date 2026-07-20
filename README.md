@@ -12,6 +12,10 @@ Powerblock Games is a:
 What else can you do?
 > You can also add friends, devs of games can do what ever with this (parties, etc.)
 
+## How does it work?
+
+instead of bundling all games into the website we upload our games to a remote server and retrive them on the client. Currently we only allow approved users to do this. To get approved go to click your user icon, click settings, and go to the developer panel.
+
 ## For players
 **Interested in playing games? Go [here](https://games.powerblock2000.com/)!**
 
